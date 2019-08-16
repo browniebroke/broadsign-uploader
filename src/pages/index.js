@@ -31,6 +31,7 @@ class BroadsignForm extends React.Component {
       "name": this.state.title,
       "domain_id": this.state.domainId,
     }
+    console.log(data);
     // Make the request
     const response = await fetch(
       "https://api-sandbox.broadsign.com:10889/rest/content/v11/import_from_url",
@@ -69,7 +70,7 @@ class BroadsignForm extends React.Component {
         <br/>
         <label>
           Title
-          <input type="text" value={this.state.title} onChange={(e) => this.handleChange(e, "tile")}/>
+          <input type="text" value={this.state.title} onChange={(e) => this.handleChange(e, "title")}/>
         </label>
         <br/>
         <input type="submit" value="Submit"/>
