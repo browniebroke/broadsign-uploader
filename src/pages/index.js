@@ -53,18 +53,22 @@ class BroadsignForm extends React.Component {
           Domain ID
           <input type="text" value={this.state.domainId} onChange={(e) => this.handleChange(e, 'domainId')} />
         </label>
+        <br/>
         <label>
           Token
           <input type="text" value={this.state.token} onChange={(e) => this.handleChange(e, 'token')} />
         </label>
+        <br/>
         <label>
           Content URL
           <input type="text" value={this.state.contentUrl} onChange={(e) => this.handleChange(e, 'contentUrl')} />
         </label>
+        <br/>
         <label>
           Title
           <input type="text" value={this.state.title} onChange={(e) => this.handleChange(e, 'tile')} />
         </label>
+        <br/>
         <input type="submit" value="Submit" />
       </form>
     );
@@ -78,7 +82,7 @@ const IndexPage = () => (
     <h1>Hi people</h1>
     <p>Welcome to your new Gatsby site.</p>
     <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
+    <div style={{ marginBottom: `1.45rem` }}>
       <BroadsignForm/>
     </div>
     <Link to="/page-2/">Go to page 2</Link>
