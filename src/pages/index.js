@@ -7,45 +7,46 @@ import SEO from "../components/seo"
 
 class BroadsignForm extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      domainId: '',
-      token: '',
-      contentUrl: '',
-      title: '',
-    };
+      domainId: "",
+      token: "",
+      contentUrl: "",
+      title: "",
+    }
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange(event, key) {
-    this.setState({[key]: event.target.value});
+    this.setState({ [key]: event.target.value })
   }
 
   async handleSubmit(event) {
-    event.preventDefault();
-    console.log('Handle form submit');
+    event.preventDefault()
+    console.log("Handle form submit")
     const data = {
-        "url": this.state.contentUrl,
-        "name": this.state.title,
-        "domain_id": this.state.domainId,
-    };
+      "url": this.state.contentUrl,
+      "name": this.state.title,
+      "domain_id": this.state.domainId,
+    }
     // Make the request
     const response = await fetch(
-        'https://api-sandbox.broadsign.com:10889/rest/content/v11/import_from_url',
-        {
-            method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${this.state.token}`,
-                'Cache-Control': 'no-cache',
-            },
-            body: JSON.stringify(data)
-        }
-    );
-    console.log(response);
-    const result = await response.json();
-    console.log(result);
+      "https://api-sandbox.broadsign.com:10889/rest/content/v11/import_from_url",
+      {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${this.state.token}`,
+          "Cache-Control": "no-cache",
+          "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify(data),
+      },
+    )
+    console.log(response)
+    const result = await response.json()
+    console.log(result)
   }
 
   render() {
@@ -53,34 +54,34 @@ class BroadsignForm extends React.Component {
       <form onSubmit={this.handleSubmit}>
         <label>
           Domain ID
-          <input type="text" value={this.state.domainId} onChange={(e) => this.handleChange(e, 'domainId')} />
+          <input type="text" value={this.state.domainId} onChange={(e) => this.handleChange(e, "domainId")}/>
         </label>
         <br/>
         <label>
           Token
-          <input type="text" value={this.state.token} onChange={(e) => this.handleChange(e, 'token')} />
+          <input type="text" value={this.state.token} onChange={(e) => this.handleChange(e, "token")}/>
         </label>
         <br/>
         <label>
           Content URL
-          <input type="text" value={this.state.contentUrl} onChange={(e) => this.handleChange(e, 'contentUrl')} />
+          <input type="text" value={this.state.contentUrl} onChange={(e) => this.handleChange(e, "contentUrl")}/>
         </label>
         <br/>
         <label>
           Title
-          <input type="text" value={this.state.title} onChange={(e) => this.handleChange(e, 'tile')} />
+          <input type="text" value={this.state.title} onChange={(e) => this.handleChange(e, "tile")}/>
         </label>
         <br/>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit"/>
       </form>
-    );
+    )
   }
 }
 
 
 const IndexPage = () => (
   <Layout>
-    <SEO title="Home" />
+    <SEO title="Home"/>
     <h1>Hi people</h1>
     <p>Welcome to your new Gatsby site.</p>
     <p>Now go build something great.</p>
