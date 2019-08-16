@@ -44,7 +44,8 @@ class BroadsignForm extends React.Component {
     );
     console.log(response);
     const result = await response.json();
-    console.log(result)
+    console.log(result);
+    event.preventDefault();
   }
 
   render() {
