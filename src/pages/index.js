@@ -24,6 +24,7 @@ class BroadsignForm extends React.Component {
   }
 
   async handleSubmit(event) {
+    event.preventDefault();
     console.log('Handle form submit');
     const data = {
         "url": this.state.contentUrl,
@@ -45,7 +46,6 @@ class BroadsignForm extends React.Component {
     console.log(response);
     const result = await response.json();
     console.log(result);
-    event.preventDefault();
   }
 
   render() {
