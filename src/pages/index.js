@@ -31,13 +31,14 @@ class BroadsignForm extends React.Component {
       "name": this.state.title,
       "domain_id": this.state.domainId,
     }
-    console.log(data);
+    console.log(data)
     // Make the request
     const response = await fetch(
       "https://api-sandbox.broadsign.com:10889/rest/content/v11/import_from_url",
       {
         method: "POST",
         headers: {
+          "Accept": "application/json",
           "Authorization": `Bearer ${this.state.token}`,
           "Cache-Control": "no-cache",
           "Content-Type": "application/json;charset=utf-8",
