@@ -9,10 +9,10 @@ class BroadsignForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      domainId: "",
-      token: "",
-      contentUrl: "",
-      title: "",
+      domainId: window.sessionStorage.getItem('domainId') || "",
+      token: window.sessionStorage.getItem('token') || "",
+      contentUrl: window.sessionStorage.getItem('contentUrl') || "",
+      title: window.sessionStorage.getItem('title') || "",
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -21,6 +21,7 @@ class BroadsignForm extends React.Component {
 
   handleChange(event, key) {
     this.setState({ [key]: event.target.value })
+    window.sessionStorage.setItem(key, event.target.value)
   }
 
   async handleSubmit(event) {
@@ -41,6 +42,8 @@ class BroadsignForm extends React.Component {
           "Accept": "application/json",
           "Authorization": `Bearer ${this.state.token}`,
           "Content-Type": "application/json;charset=utf-8",
+          "Origin": "https://www.broadsign.com",
+          "Referer": "https://www.broadsign.com/",
         },
         body: JSON.stringify(data),
       },
