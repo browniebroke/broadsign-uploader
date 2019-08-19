@@ -40,7 +40,6 @@ class BroadsignForm extends React.Component {
         headers: {
           "Accept": "application/json",
           "Authorization": `Bearer ${this.state.token}`,
-          "Cache-Control": "no-cache",
           "Content-Type": "application/json;charset=utf-8",
         },
         body: JSON.stringify(data),
