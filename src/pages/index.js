@@ -9,10 +9,10 @@ class BroadsignForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      domainId: window.sessionStorage.getItem('domainId') || "",
-      token: window.sessionStorage.getItem('token') || "",
-      contentUrl: window.sessionStorage.getItem('contentUrl') || "",
-      title: window.sessionStorage.getItem('title') || "",
+      domainId: window.sessionStorage.getItem("domainId") || "",
+      token: window.sessionStorage.getItem("token") || "",
+      contentUrl: window.sessionStorage.getItem("contentUrl") || "",
+      title: window.sessionStorage.getItem("title") || "",
     }
 
     this.handleChange = this.handleChange.bind(this)
