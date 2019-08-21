@@ -22,5 +22,5 @@ export async function handler(event, context, callback) {
     },
   )
   console.log(response)
-  const result = await response.json()
+  return await response.json()
 }
