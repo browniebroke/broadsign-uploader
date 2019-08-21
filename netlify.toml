@@ -1,0 +1,10 @@
+[build]
+  base    = ""
+  publish = "build"
+  command = "yarn run build"
+
+# This a rule for Single Page Applications
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
