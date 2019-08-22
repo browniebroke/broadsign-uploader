@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import axios from "axios"
 
 const BroadsignForm = () => {
   const [domainId, setDomainId] = useState("")
@@ -17,13 +18,25 @@ const BroadsignForm = () => {
       domainId,
       token,
     }
-    fetch("/.netlify/functions/broadsign-upload", {
-      method: "POST",
-      headers: { Accept: "application/json" },
-      body: JSON.stringify(bodyData),
-    })
-      .then(response => response.json())
-      .then(json => setResult(json))
+
+    axios
+      .post("/.netlify/functions/broadsign-upload", bodyData, {
+        headers: { Accept: "application/json" },
+      })
+      .then(response => {
+        setResult(response.data)
+      })
+      .catch(err => {
+        let message = ``
+        if (err.response) {
+          message = `Error when uploading`
+        } else if (err.request) {
+          message = `Error while trying to send data`
+        } else {
+          message = `Error`
+        }
+        setResult(`${message}:\n${err.message}`)
+      })
   }
 
   return (
@@ -67,7 +80,17 @@ const BroadsignForm = () => {
       <div className="form-section">
         <input type="submit" value="Submit" />
       </div>
-      <div className="form-section">{result && <pre>{result}</pre>}</div>
+      <div className="form-section">
+        {result && (
+          <div
+            style={{
+              backgroundColor: result.includes("Error") ? "red" : "green",
+            }}
+          >
+            <pre>{result}</pre>
+          </div>
+        )}
+      </div>
     </form>
   )
 }
