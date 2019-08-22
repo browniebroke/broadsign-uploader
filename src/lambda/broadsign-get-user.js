@@ -4,23 +4,15 @@ export async function handler(event, context, callback) {
   console.log("Handler starting")
   const bodyObj = JSON.parse(event.body)
 
-  const requestData = {
-    url: bodyObj.contentUrl,
-    name: bodyObj.title,
-    domain_id: bodyObj.domainId,
-  }
-
   try {
     // Make the request
     console.log("About to send data...")
-    const response = await axios.post(
-      "https://api.broadsign.com:10889/rest/content/v11/import_from_url",
-      requestData,
+    const response = await axios.get(
+      "https://api.broadsign.com:10889/rest/user/v12/self",
       {
         headers: {
           Accept: "application/json",
           Authorization: `Bearer ${bodyObj.token}`,
-          "Content-Type": "application/json;charset=utf-8",
         },
       }
     )
