@@ -29,13 +29,13 @@ const BroadsignForm = () => {
       .catch(err => {
         let message = ``
         if (err.response) {
-          message = `Error when uploading`
+          message = `Error when uploading (${err.response.data.error})`
         } else if (err.request) {
-          message = `Error while trying to send data`
+          message = `Error while trying to send data (${err.message})`
         } else {
-          message = `Error`
+          message = `Unexpected Error: ${err.message}`
         }
-        setResult(`${message}:\n${err.message}`)
+        setResult(message)
       })
   }
 
