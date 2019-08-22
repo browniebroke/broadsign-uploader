@@ -2,22 +2,20 @@ import axios from "axios"
 
 export async function handler(event, context, callback) {
   console.log("Handler starting")
-  console.log(event.body)
-
   const bodyObj = JSON.parse(event.body)
-  console.log(bodyObj)
 
-  const data = {
+  const requestData = {
     url: bodyObj.contentUrl,
     name: bodyObj.title,
     domain_id: bodyObj.domainId,
   }
-  console.log(data)
+
   try {
     // Make the request
+    console.log("About to send data...")
     const response = await axios.post(
       "https://api-sandbox.broadsign.com:10889/rest/content/v11/import_from_url",
-      data,
+      requestData,
       {
         headers: {
           Accept: "application/json",
@@ -26,18 +24,28 @@ export async function handler(event, context, callback) {
         },
       }
     )
-    console.log(response)
-    const data = response.data
-    console.log(data)
+    console.log("Received response %s", response)
     return {
-      statusCode: 200,
-      body: JSON.stringify(data),
+      statusCode: response.status,
+      body: JSON.stringify(response.data),
     }
   } catch (err) {
-    console.log(err) // output to netlify function log
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ msg: err.message }),
+    if (err.response) {
+      console.error("Received a status code > 2XX (%s)", err.message)
+      // Respond with the same status code
+      return {
+        statusCode: err.response.status,
+        body: JSON.stringify(err.response.data),
+      }
+    } else {
+      const errMessage = err.request
+        ? "The request did not receive a response: %s"
+        : "Unexpected error when sending the request"
+      console.error(errMessage, err)
+      return {
+        statusCode: 500,
+        body: JSON.stringify({ msg: err.message }),
+      }
     }
   }
 }

@@ -18,6 +18,7 @@
     "build": "run-p build:**",
     "build:app": "react-scripts build",
     "build:lambda": "netlify-lambda build src/lambda",
+    "lambda": "netlify-lambda serve src/lambda/",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
